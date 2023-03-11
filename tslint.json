@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "semicolon": [true, "always"],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "variable-name": [true, "allow-pascal-case"]
+  }
+}

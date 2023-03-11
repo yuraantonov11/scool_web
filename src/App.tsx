@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import PrivateRoute from './PrivateRoute';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import NotFound from './pages/NotFound/NotFound';
+
+/**
+ * Top level application router
+ *
+ * @returns {Component}
+ */
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      {/*<Route path='/create-account' element={<CreateAccount />} />*/}
+      <Route path='/login' element={<LoginPage />} />
+      {/* Private Route */}
+      <Route
+        path='/dashboard'
+        element={
+          <PrivateRoute>
+            <DashboardPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
-}
+};
 
 export default App;
