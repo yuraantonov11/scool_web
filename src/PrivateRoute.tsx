@@ -1,11 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import {AuthState} from './types/auth.types';
+import {RootState} from "./store";
 
-interface RootState {
-  auth: AuthState;
-  // Other slices of state...
-}
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   let location = useLocation();
 

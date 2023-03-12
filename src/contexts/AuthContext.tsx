@@ -1,42 +1,34 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import {User} from '../models/user';
-import {IAuthContext} from '../types/auth.types';
+import React, { createContext, useContext, useState } from 'react';
 
-export const AuthContext = createContext<IAuthContext>({
-    isAuthenticated: false,
-    currentUser: null,
-    login: () => {},
-    logout: () => {},
+interface User {
+    email: string;
+    token: string;
+}
+
+interface AuthContextState {
+    user: User | null;
+    setUser: (user: User | null) => void;
+}
+
+const AuthContext = createContext<AuthContextState>({
+    user: null,
+    setUser: () => {},
 });
 
-export function useAuth() {
-    return useContext(AuthContext);
+type Props = {
+    children?: React.ReactNode;
 }
 
-interface IAuthProviderProps {
-    children: ReactNode;
-}
-
-export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-    const login = () => {
-        setIsAuthenticated(true);
-        setCurrentUser({
-            email: '', id: 0, password: '', role: '', username: ''
-            /* дані користувача після входу */
-        });
-    };
-
-    const logout = () => {
-        setIsAuthenticated(false);
-        setCurrentUser(null);
-    };
+const AuthProvider: React.FC<Props> = ({ children }) => {
+    const [user, setUser] = useState<User | null>(null);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, currentUser }}>
-      {children}
-    </AuthContext.Provider>
+        <AuthContext.Provider value={{ user, setUser }}>
+            {children}
+        </AuthContext.Provider>
     );
 };
+
+const useAuth = () => useContext(AuthContext);
+
+export { AuthProvider, useAuth };

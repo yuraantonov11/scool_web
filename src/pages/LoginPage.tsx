@@ -1,13 +1,31 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch } from 'redux-thunk';
+import { login } from "../actions/auth";
+import { RootState } from "../store";
+
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Tabs, Tab, AppBar } from '@mui/material';
+import {useEffect} from "react";
+import {AuthActionTypes} from "../types/auth.types";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [value, setValue] = React.useState(0);
+
+  const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AuthActionTypes>>();
+  const authState = useSelector((state: RootState) => state.auth);
+  const { loading, isAuthenticated } = authState;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirect to the dashboard or home page
+      console.log("Logged in successfully!");
+    }
+  }, [isAuthenticated]);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -19,6 +37,8 @@ const LoginPage = () => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    dispatch(login(email, password));
+
     console.log('Email:', email, 'Password:', password);
   };
 
@@ -61,7 +81,7 @@ const LoginPage = () => {
               sx={{ mt: 3, mb: 2 }}
               fullWidth
             >
-              Login
+              {loading ? "Loading..." : "Sign In"}
             </Button>
           </>
         )}
@@ -87,6 +107,7 @@ const LoginPage = () => {
               fullWidth
             />
             <Button
+              disabled={loading}
               variant='contained'
               type='submit'
               sx={{ mt: 3, mb: 2 }}
