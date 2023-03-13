@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from 'redux-thunk';
-import { login } from "../actions/auth";
+import { login, register } from "../actions/auth";
 import { RootState } from "../store";
 
 import Box from '@mui/material/Box';
@@ -13,6 +13,7 @@ import {AuthActionTypes} from "../types/auth.types";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
+  const [userName, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [value, setValue] = React.useState(0);
 
@@ -31,13 +32,24 @@ const LoginPage: React.FC = () => {
     setEmail(event.target.value);
   };
 
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value);
+  };
+
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     dispatch(login(email, password));
+
+    console.log('Email:', email, 'Password:', password);
+  };
+
+  const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(register(userName, email, password));
 
     console.log('Email:', email, 'Password:', password);
   };
@@ -77,7 +89,7 @@ const LoginPage: React.FC = () => {
             <Button
               variant='contained'
               type='submit'
-              onClick={handleSubmit}
+              onClick={handleSignIn}
               sx={{ mt: 3, mb: 2 }}
               fullWidth
             >
@@ -91,6 +103,8 @@ const LoginPage: React.FC = () => {
               label='Name'
               variant='outlined'
               margin='normal'
+              value={userName}
+              onChange={handleUserNameChange}
               fullWidth
             />
             <TextField
@@ -109,6 +123,7 @@ const LoginPage: React.FC = () => {
             <Button
               disabled={loading}
               variant='contained'
+              onClick={handleSignUp}
               type='submit'
               sx={{ mt: 3, mb: 2 }}
               fullWidth

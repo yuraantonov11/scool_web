@@ -23,11 +23,17 @@ export const login = (
             },
         };
 
-        const { data } = await axios.post(
-            "/api/auth/login",
-            { email, password },
-            config
-        );
+        // todo: uncomment when api will done
+        // const { data } = await axios.post(
+        //     "/api/auth/login",
+        //     { email, password },
+        //     config
+        // );
+        const data = {
+            token: '',
+            id: 123,
+            email: 'mail.example.com'
+        };
 
         dispatch({ type: LOGIN_SUCCESS, payload: data });
     } catch (error: any) {
