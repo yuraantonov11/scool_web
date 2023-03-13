@@ -1,6 +1,6 @@
-import axios from "axios";
-import { ThunkAction } from "redux-thunk";
-import { RootState } from "../store";
+import axios from 'axios';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from '../store';
 import {
     AuthActionTypes,
     LOGIN_FAIL,
@@ -8,7 +8,7 @@ import {
     LOGIN_SUCCESS, REGISTER_FAIL,
     REGISTER_REQUEST,
     REGISTER_SUCCESS
-} from "../types/auth.types";
+} from '../types/auth.types';
 
 export const login = (
     email: string,
@@ -19,7 +19,7 @@ export const login = (
 
         const config = {
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
         };
 
@@ -54,12 +54,12 @@ export const register = (
 
         const config = {
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
         };
 
         const { data } = await axios.post(
-            "/api/auth/register",
+            '/api/auth/register',
             { name, email, password },
             config
         );

@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { login, register } from "../actions/auth";
-import { RootState } from "../store";
+import { login, register } from '../actions/auth';
+import { RootState } from '../store';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Tabs, Tab, AppBar } from '@mui/material';
-import {useEffect} from "react";
-import {AuthActionTypes} from "../types/auth.types";
+import {useEffect} from 'react';
+import {AuthActionTypes} from '../types/auth.types';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (isAuthenticated) {
       // Redirect to the dashboard or home page
-      console.log("Logged in successfully!");
+      console.log('Logged in successfully!');
     }
   }, [isAuthenticated]);
 
@@ -93,7 +93,7 @@ const LoginPage: React.FC = () => {
               sx={{ mt: 3, mb: 2 }}
               fullWidth
             >
-              {loading ? "Loading..." : "Sign In"}
+              {loading ? 'Loading...' : 'Sign In'}
             </Button>
           </>
         )}
