@@ -17,11 +17,11 @@ export const login = (
     try {
         dispatch({ type: LOGIN_REQUEST });
 
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
+        // const config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // };
 
         // todo: uncomment when api will done
         // const { data } = await axios.post(
