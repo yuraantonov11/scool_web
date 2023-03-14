@@ -17,23 +17,17 @@ export const login = (
     try {
         dispatch({ type: LOGIN_REQUEST });
 
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // };
-
-        // todo: uncomment when api will done
-        // const { data } = await axios.post(
-        //     "/api/auth/login",
-        //     { email, password },
-        //     config
-        // );
-        const data = {
-            token: '',
-            id: 123,
-            email: 'mail.example.com'
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         };
+
+        const { data } = await axios.post(
+            '/api/auth/login',
+            { email, password },
+            config
+        );
 
         dispatch({ type: LOGIN_SUCCESS, payload: data });
     } catch (error: any) {

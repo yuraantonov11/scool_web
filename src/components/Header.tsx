@@ -9,13 +9,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Box } from '@mui/system';
 import Avatar from '@mui/material/Avatar';
-import {useSelector} from "react-redux";
-import {RootState} from "../store";
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 const Header: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const user = useSelector((state: RootState) => state.auth.user);
+    const user = useSelector((state: RootState) => state.auth?.user);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -26,13 +26,13 @@ const Header: React.FC = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position='static'>
                 <Toolbar>
                     <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
+                        size='large'
+                        edge='start'
+                        color='inherit'
+                        aria-label='menu'
                         sx={{ mr: 2 }}
                         onClick={handleClick}
                     >
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
                         <MenuItem onClick={handleClose}>About</MenuItem>
                         <MenuItem onClick={handleClose}>Login</MenuItem>
                     </Menu>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
                         Your App
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
                                 <Typography sx={{ ml: 2 }}>{user.email}</Typography>
                             </>
                         ) : (
-                            <Button color="inherit">Login</Button>
+                            <Button color='inherit'>Login</Button>
                         )}
                     </Box>
                 </Toolbar>
