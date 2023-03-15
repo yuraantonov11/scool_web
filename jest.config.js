@@ -8,4 +8,7 @@ module.exports = {
     '\\.(css|scss)$': 'identity-obj-proxy',
     '^axios$': '<rootDir>/node_modules/axios',
   },
+  transformIgnorePatterns: [
+    "/node_modules/(?!axios).+\\.js$"
+  ],
 };
