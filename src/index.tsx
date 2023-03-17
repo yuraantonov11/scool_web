@@ -1,17 +1,43 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import * as serviceWorker from './serviceWorker';
+
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import App from './App';
-import store from './store';
-import {BrowserRouter} from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
+import { Toaster } from 'react-hot-toast';
 
+import { theme } from './theme';
+import { store } from './state/store';
 
-const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Failed to find the root element');
-const root = createRoot(rootElement);
+import App from './app/App';
+
+import './app/styles/index.scss';
+
+const container = document.getElementById('root');
+
+if (!container) {
+  throw new Error("Can't find the 'app' element");
+}
+
+const root = createRoot(container);
+
 root.render(
+  <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>);
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <CssBaseline />
+          <Toaster />
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
+  </React.StrictMode>
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

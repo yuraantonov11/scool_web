@@ -1,0 +1,8 @@
+@media print {
+  .print {
+    min-width: unset !important;
+  }
+}
+.page-break {
+  page-break-before: always;
+}
